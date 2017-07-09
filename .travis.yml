@@ -17,7 +17,7 @@ jobs:
   include:
     - stage: build
       script:
-        - mvn clean install
-    - stage: sonar
-      script:
-        - sonar-scanner
+        - mvn clean install sonar:sonar
+#    - stage: sonar
+#      script:
+#        - sonar-scanner
