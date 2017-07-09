@@ -5,8 +5,7 @@ addons:
   sonarcloud:
     organization: "nbaars-github"
     token:
-      secure: "TzVJoe9+0aBF9j2Tnm/meXP9f4Rz/jSnGBHUrbCxYKTNDRzlM8+D2mAR96Z8+1axtFBHVPzmfz8tGVA3AeYwHj6CK/iG6azvd60ip4mUmDTazMiwYetYrkAmpmobAg3LSRjNtH3uwu40gzS5xekqGutcMCGJ1UAq/IVY6O/swwiEiGkjIPnKmTLy3e0ce18faOofFpLRFEnDrhg7iWAclYfhBSK0Gkia2SIHyG7z8+YHagoclS8r5A3Sst7xVU+fV1+71yjtzSRVIasT1Rxf/6jnWiw1AQ8T8P1zxItTRUC+IgnMTUDxoDSXzkzxPROQy/EB3QJSHpIEojsYRNShTeyLbz8OvoCzhrL0h9ewvGT+FjCK1uZTU8vZ6VRF9avQyETe3rPmlFSTqnKtV5t37tuMSZr2KoI+zaxXv8eKrDJ5TNwBEaChBzMbVuCSsOfw/z9vnU71yS5h2cq2LPoMCSRtlxqmMaYXMdYHL8RCDyM2zy5397cO/uhBnaXHqZKDg6B3aaAm6vm6zO4ANPnAhbKKAXd3oDS253/Tczuqy2oP5curRmKSgWi8eotai3in2sIHLioKMgwMz9gsCpbxl4MQwKEeUAhARPzyKq/pHyzFHhOYYPaqBr6ZjGSX2Xu7fnVSF8wbM9cs2m/5RtwYBcijce0LzjIg9m7TpYqxlaY="
-
+      secure: $SONAR_TOKEN
 cache:
   directories:
     - '$HOME/.sonar/cache'
