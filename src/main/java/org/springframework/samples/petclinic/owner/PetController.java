@@ -15,21 +15,24 @@
  */
 package org.springframework.samples.petclinic.owner;
 
-import java.util.Collection;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.Collection;
 
 /**
  * @author Juergen Hoeller
@@ -111,6 +114,22 @@ class PetController {
             this.pets.save(pet);
             return "redirect:/owners/{ownerId}";
         }
+    }
+
+    public void parseXML(InputStream input) throws XMLStreamException {
+        XMLInputFactory factory = XMLInputFactory.newFactory();
+        XMLStreamReader reader = factory.createXMLStreamReader(input);
+    }
+
+    @RequestMapping("/images/{image}")
+    public ResponseEntity<?> getImage(@PathVariable("image") String image) throws FileNotFoundException, XMLStreamException {
+        File file = new File("resources/images/", image); //Weak point
+
+        if (!file.exists()) {
+            return ResponseEntity.notFound().build();
+        }
+        parseXML(new FileInputStream(file));
+        return ResponseEntity.ok().body(new FileInputStream(file));
     }
 
 }

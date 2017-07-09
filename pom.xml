@@ -33,6 +33,7 @@
 
     </properties>
 
+
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
         <dependency>
@@ -220,22 +221,55 @@
                     </execution>
                 </executions>
             </plugin>
-        </plugins>
-    </build>
-    <reporting>
-        <plugins>
-            <!-- integrate maven-cobertura-plugin to project site -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>${cobertura.version}</version>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>3.0.1</version>
                 <configuration>
-                    <formats>
-                        <format>html</format>
-                    </formats>
-                    <check/>
+                    <effort>Max</effort>
+                    <threshold>Low</threshold>
+                    <failOnError>true</failOnError>
+                    <plugins>
+                        <plugin>
+                            <groupId>com.h3xstream.findsecbugs</groupId>
+                            <artifactId>findsecbugs-plugin</artifactId>
+                            <version>LATEST</version> <!-- Auto-update to the latest stable -->
+                        </plugin>
+                    </plugins>
+                    <executions>
+                        <execution>
+                            <id>Findbugs_all_sources</id>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                            <phase>verify</phase>
+                        </execution>
+                    </executions>
                 </configuration>
             </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <outputDirectory>${project.build.directory}/site</outputDirectory>
+        <plugins>
+            <!-- integrate maven-cobertura-plugin to project site -->
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>findbugs-maven-plugin</artifactId>-->
+            <!--</plugin>-->
+            <!--<plugin>-->
+            <!--<groupId>org.codehaus.mojo</groupId>-->
+            <!--<artifactId>cobertura-maven-plugin</artifactId>-->
+            <!--<version>${cobertura.version}</version>-->
+            <!--<configuration>-->
+            <!--<outputDirectory>${project.build.directory}</outputDirectory>-->
+            <!--<formats>-->
+            <!--<format>html</format>-->
+            <!--</formats>-->
+            <!--<check/>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
         </plugins>
     </reporting>
 
